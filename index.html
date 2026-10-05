@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Walimatul helps couples create elegant digital wedding invitations with RSVP, maps, schedules, and easy sharing." />
+  <title>Walimatul — Digital Wedding Invitations</title>
+  <style>
+    :root{
+      --bg:#f8f5ef;--card:#fffdf8;--ink:#1f2a24;--muted:#6d756f;--accent:#6f8068;
+      --accent-dark:#52604d;--line:#e7e0d5;--soft:#eee8df;--shadow:0 22px 70px rgba(47,56,49,.12)
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+    a{color:inherit;text-decoration:none}
+    button,input{font:inherit}
+    .wrap{width:min(1160px,calc(100% - 40px));margin:auto}
+    .nav{height:78px;display:flex;align-items:center;justify-content:space-between}
+    .brand{font-family:Georgia,serif;font-size:1.55rem;font-weight:700;letter-spacing:-.03em}
+    .nav-links{display:flex;gap:28px;align-items:center;color:#4f5a53;font-size:.95rem}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 20px;border-radius:999px;border:1px solid transparent;background:var(--accent);color:white;font-weight:700;transition:.2s ease}
+    .btn:hover{transform:translateY(-1px);background:var(--accent-dark)}
+    .btn.ghost{background:transparent;color:var(--ink);border-color:#cfc7bb}
+    .hero{padding:72px 0 92px;display:grid;grid-template-columns:1.04fr .96fr;gap:72px;align-items:center}
+    .eyebrow{font-size:.78rem;text-transform:uppercase;letter-spacing:.18em;font-weight:800;color:var(--accent-dark);margin-bottom:18px}
+    h1,h2,h3{font-family:Georgia,serif;line-height:1.08;letter-spacing:-.035em;margin:0}
+    h1{font-size:clamp(3rem,7vw,5.6rem);max-width:790px}
+    .hero p{font-size:1.12rem;color:var(--muted);max-width:620px;margin:24px 0 30px}
+    .actions{display:flex;gap:12px;flex-wrap:wrap}
+    .micro{margin-top:16px;font-size:.85rem;color:#7c827d}
+    .preview{position:relative;min-height:590px}
+    .phone{width:min(380px,88%);margin-left:auto;background:#fff;border:10px solid #222c26;border-radius:42px;box-shadow:var(--shadow);overflow:hidden;transform:rotate(2deg)}
+    .invite{min-height:570px;padding:54px 34px;background:linear-gradient(180deg,#f3eee4 0%,#faf7f0 100%);text-align:center;position:relative}
+    .invite:before,.invite:after{content:"";position:absolute;width:120px;height:120px;border:1px solid rgba(111,128,104,.28);border-radius:50%;top:-28px}
+    .invite:before{left:-50px}.invite:after{right:-55px;top:auto;bottom:-35px}
+    .invite .smallcaps{font-size:.67rem;letter-spacing:.18em;text-transform:uppercase;color:#727c74}
+    .invite h3{font-size:2.6rem;margin:22px 0 10px;font-weight:500}
+    .invite .and{font-style:italic;font-family:Georgia,serif;color:#7e877f;margin:4px 0}
+    .invite .date{margin:32px auto 18px;padding:15px;border-top:1px solid #cfc9bc;border-bottom:1px solid #cfc9bc;width:78%;font-weight:700}
+    .invite .location{font-size:.88rem;color:#687069}
+    .float-card{position:absolute;background:white;border:1px solid var(--line);border-radius:18px;padding:15px 18px;box-shadow:0 16px 40px rgba(56,63,58,.12);font-size:.88rem}
+    .float-card strong{display:block;color:var(--ink)}
+    .fc1{left:0;top:100px}.fc2{right:-12px;bottom:68px}
+    .section{padding:94px 0}
+    .section.alt{background:#fffdf8;border-block:1px solid var(--line)}
+    .section-head{text-align:center;max-width:720px;margin:0 auto 48px}
+    .section-head h2{font-size:clamp(2.35rem,5vw,4.1rem)}
+    .section-head p{color:var(--muted);font-size:1.04rem}
+    .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .feature{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:28px}
+    .feature .icon{width:44px;height:44px;border-radius:13px;background:#e8ede5;display:grid;place-items:center;margin-bottom:22px;font-size:1.2rem}
+    .feature h3{font-size:1.45rem;margin-bottom:10px}
+    .feature p{margin:0;color:var(--muted);font-size:.95rem}
+    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;counter-reset:step}
+    .step{counter-increment:step;padding-top:22px;border-top:1px solid #cfc8bd}
+    .step:before{content:"0" counter(step);font-weight:800;color:var(--accent-dark);font-size:.8rem}
+    .step h3{font-size:1.6rem;margin:12px 0 8px}
+    .step p{margin:0;color:var(--muted)}
+    .templates{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .template{height:360px;border-radius:24px;overflow:hidden;border:1px solid var(--line);padding:34px;display:flex;flex-direction:column;justify-content:center;text-align:center;box-shadow:0 10px 30px rgba(40,46,41,.06)}
+    .t1{background:#f6efe8}.t2{background:#e9eee8}.t3{background:#f1ece6}
+    .template span{font-size:.69rem;letter-spacing:.16em;text-transform:uppercase;color:#777}
+    .template h3{font-size:2rem;margin:18px 0 8px;font-weight:500}
+    .template p{margin:0;color:#6e746f;font-size:.86rem}
+    .pricing{max-width:760px;margin:auto;background:#1f2a24;color:white;border-radius:30px;padding:44px;display:grid;grid-template-columns:1fr auto;gap:30px;align-items:center}
+    .pricing h2{font-size:2.65rem}
+    .pricing p{color:#c8d0ca;max-width:470px}
+    .price{font-family:Georgia,serif;font-size:3rem;white-space:nowrap}.price small{font-family:Inter,sans-serif;font-size:.85rem;color:#bcc5bf}
+    .cta{padding:98px 0;text-align:center}
+    .cta-box{background:#e4eadf;border-radius:34px;padding:70px 24px}
+    .cta h2{font-size:clamp(2.4rem,5vw,4.4rem);max-width:760px;margin:auto}
+    .cta p{color:#647065;margin:18px auto 28px;max-width:580px}
+    footer{padding:34px 0 50px;color:#707770;font-size:.9rem}
+    .footer{display:flex;justify-content:space-between;gap:20px;border-top:1px solid var(--line);padding-top:28px}
+    @media(max-width:860px){
+      .nav-links a:not(.btn){display:none}.hero{grid-template-columns:1fr;padding-top:42px;gap:52px}.preview{min-height:520px}
+      .phone{margin:auto}.grid3,.steps,.templates{grid-template-columns:1fr}.template{height:300px}.pricing{grid-template-columns:1fr}.fc1{left:4px}.fc2{right:4px}
+    }
+    @media(max-width:520px){
+      .wrap{width:min(100% - 26px,1160px)}.nav{height:68px}.nav .btn{padding:10px 14px}.hero{padding-bottom:66px}
+      h1{font-size:3.4rem}.preview{min-height:490px}.phone{width:92%}.invite{min-height:500px;padding:44px 24px}.float-card{display:none}
+      .section{padding:70px 0}.pricing{padding:30px}.footer{flex-direction:column}
+    }
+  </style>
+</head>
+<body>
+  <header class="wrap">
+    <nav class="nav" aria-label="Main navigation">
+      <a class="brand" href="#">Walimatul.</a>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#templates">Templates</a>
+        <a href="#pricing">Pricing</a>
+        <a class="btn" href="#start">Create invitation</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="wrap hero">
+      <div>
+        <div class="eyebrow">Wedding invitations, beautifully digital</div>
+        <h1>Your special day deserves a beautiful first impression.</h1>
+        <p>Create an elegant wedding invitation in minutes. Share it instantly, collect RSVPs, guide guests to your venue, and keep every important detail in one beautiful place.</p>
+        <div class="actions">
+          <a class="btn" href="#start">Create your invitation</a>
+          <a class="btn ghost" href="#templates">View templates</a>
+        </div>
+        <div class="micro">No design skills required · Mobile friendly · Easy to share</div>
+      </div>
+
+      <div class="preview" aria-label="Wedding invitation preview">
+        <div class="float-card fc1"><strong>RSVP received ✓</strong>Sarah & family · 4 guests</div>
+        <div class="phone">
+          <div class="invite">
+            <div class="smallcaps">Together with their families</div>
+            <h3>Aisyah</h3>
+            <div class="and">&</div>
+            <h3>Hafiz</h3>
+            <div class="date">18 · 12 · 2026</div>
+            <div class="location">Dewan Seri Mutiara<br/>Johor Bahru, Malaysia</div>
+          </div>
+        </div>
+        <div class="float-card fc2"><strong>Everything in one link</strong>RSVP · Map · Schedule · Wishes</div>
+      </div>
+    </section>
+
+    <section class="section alt" id="features">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">Made for modern celebrations</div>
+          <h2>Everything your guests need, in one invitation.</h2>
+          <p>Beautiful enough to feel personal, practical enough to make wedding planning easier.</p>
+        </div>
+        <div class="grid3">
+          <article class="feature"><div class="icon">♡</div><h3>Elegant templates</h3><p>Choose a style that feels like you and personalize names, colours, photos, wording, and details.</p></article>
+          <article class="feature"><div class="icon">✓</div><h3>Smart RSVP</h3><p>Collect guest attendance and party size digitally, without chasing replies across multiple chats.</p></article>
+          <article class="feature"><div class="icon">⌖</div><h3>Venue & maps</h3><p>Give guests clear venue information and a direct route to the celebration from their phone.</p></article>
+          <article class="feature"><div class="icon">◷</div><h3>Event schedule</h3><p>Show ceremony, reception, meals, and other important moments in a clear wedding-day timeline.</p></article>
+          <article class="feature"><div class="icon">✦</div><h3>Guest wishes</h3><p>Let friends and family leave meaningful messages and well wishes for the couple.</p></article>
+          <article class="feature"><div class="icon">↗</div><h3>Share anywhere</h3><p>Send one simple link through WhatsApp, Telegram, email, social media, or a QR code.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">Simple from start to share</div>
+          <h2>Create it in three easy steps.</h2>
+        </div>
+        <div class="steps">
+          <div class="step"><h3>Choose your look</h3><p>Pick a wedding template that matches the tone of your celebration.</p></div>
+          <div class="step"><h3>Add your details</h3><p>Enter names, dates, venue, programme, photos, RSVP options, and your personal message.</p></div>
+          <div class="step"><h3>Publish & share</h3><p>Get your unique invitation link and send it to every guest instantly.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="templates">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">A style for every couple</div>
+          <h2>Designed to feel like your day.</h2>
+        </div>
+        <div class="templates">
+          <article class="template t1"><span>Classic · Ivory</span><h3>Sarah & Amir</h3><p>Timeless, warm, refined.</p></article>
+          <article class="template t2"><span>Botanical · Sage</span><h3>Alya & Danish</h3><p>Natural, calm, contemporary.</p></article>
+          <article class="template t3"><span>Modern · Minimal</span><h3>Hana & Ziyad</h3><p>Simple, editorial, elegant.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="pricing">
+      <div class="wrap">
+        <div class="pricing">
+          <div>
+            <div class="eyebrow" style="color:#b9c8b9">Simple pricing</div>
+            <h2>One wedding. One simple price.</h2>
+            <p>Create, publish, and share your digital invitation without complicated subscriptions. Pricing can evolve as the product grows.</p>
+          </div>
+          <div class="price">RM49 <small>/ event</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap cta" id="start">
+      <div class="cta-box">
+        <div class="eyebrow">Start your invitation</div>
+        <h2>Make the first moment of your wedding memorable.</h2>
+        <p>Create a beautiful digital invitation your guests will love opening—and you’ll love sharing.</p>
+        <a class="btn" href="mailto:hello@walimatul.com?subject=I%20want%20to%20create%20a%20Walimatul%20invitation">Create my invitation</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    <div class="footer">
+      <strong class="brand">Walimatul.</strong>
+      <span>Digital invitations for beautiful celebrations.</span>
+      <span>© 2026 Walimatul</span>
+    </div>
+  </footer>
+</body>
+</html>
