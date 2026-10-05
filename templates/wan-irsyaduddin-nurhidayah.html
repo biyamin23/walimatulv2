@@ -646,12 +646,14 @@
     o.disconnect();
   }, { rootMargin: '300px' }).observe($('#peta'));
 
-  /* ====== Gelongsor kad ====== */
+  /* ====== Gelongsor kad (jika seksyen wujud) ====== */
   const gel = $('#gelongsor');
-  gel.addEventListener('scroll', () => {
-    const i = Math.round(gel.scrollLeft / (gel.scrollWidth - gel.clientWidth || 1));
-    document.querySelectorAll('#titik i').forEach((t, k) => t.classList.toggle('aktif', k === i));
-  }, { passive: true });
+  if (gel) {
+    gel.addEventListener('scroll', () => {
+      const i = Math.round(gel.scrollLeft / (gel.scrollWidth - gel.clientWidth || 1));
+      document.querySelectorAll('#titik i').forEach((t, k) => t.classList.toggle('aktif', k === i));
+    }, { passive: true });
+  }
 
   /* ====== RSVP ====== */
   const borang = $('#borangRsvp');
